@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using AsnRemaninderAPI.Models;
 
-namespace Ass.Data
+namespace AsnRemaninderAPI.Data
 {
   public class AppDbContext : DbContext
   {

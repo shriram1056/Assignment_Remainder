@@ -25,7 +25,7 @@ namespace AsnRemaninderAPI.Models
         public DateTime DueDate { get; set; }
 
         [Column("course_id")]
-        public int CourseId { get; set; }
+        public long CourseId { get; set; }
 
         [ForeignKey("CourseId")]
         public Course? Course { get; set; }

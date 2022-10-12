@@ -1,0 +1,10 @@
+﻿launchURL in properties: instead of listening at 'https://localhost:7167/', the api will listen at https://localhost:7167/assignments/
+
+local variable and params: camelCase
+
+private field: _camelCase 
+
+value types (primitive) cannot be nullable whereas reference type can be nullable. 
+
+int? is nullable and it is different type from int which cannot accpet null
+
