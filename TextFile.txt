@@ -8,3 +8,10 @@ value types (primitive) cannot be nullable whereas reference type can be nullabl
 
 int? is nullable and it is different type from int which cannot accpet null
 
+commands: 
+dotnet add package package_name
+dotnet user-secrets init
+dotnet user-secrets set "UserId" "shriram"
+
+dotnet ef migrations add initialmigration  
+dotnet ef database update

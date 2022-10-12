@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AsnRemaninderAPI.Models
+namespace AsnRemainderAPI.Models
 {
     [Table("assignment")]
     public class Assignment

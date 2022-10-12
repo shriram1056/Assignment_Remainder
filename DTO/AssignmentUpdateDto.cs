@@ -1,4 +1,4 @@
-namespace AsnRemaninderAPI.DTO
+namespace AsnRemainderAPI.DTO
 {
   public class AssignmentUpdateDto
   {

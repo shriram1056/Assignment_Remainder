@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AsnRemaninderAPI.Models
+namespace AsnRemainderAPI.Models
 {
     [Table("course")]
     public class Course
@@ -19,7 +19,6 @@ namespace AsnRemaninderAPI.Models
         [Column("asn_due_count")]
         public long AsnDueCount { get; set; }
 
-        
         public List<Assignment>? Assignments { get; set; }
 
     }

@@ -1,4 +1,4 @@
-using AsnRemaninderAPI.Data;
+using AsnRemainderAPI.Data;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
