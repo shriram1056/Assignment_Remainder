@@ -11,7 +11,7 @@ namespace AsnRemainderAPI.Data
     {
       _context = context;
     }
-    
+
     public async Task CreateAssignment(Assignment asn)
     {
       if (asn == null)
@@ -36,7 +36,7 @@ namespace AsnRemainderAPI.Data
       return await _context.Assignments.FirstOrDefaultAsync(c => c.Id == id);
     }
 
-    public async Task<List<Assignment>> GetAssignmentCommands()
+    public async Task<List<Assignment>> GetAllAssignments()
     {
       return await _context.Assignments.ToListAsync();
     }

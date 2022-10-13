@@ -6,7 +6,7 @@ namespace AsnRemainderAPI.Data
   {
     Task SaveChanges();
     Task<Assignment?> GetAssignmentById(int id);
-    Task<List<Assignment>> GetAssignmentCommands();
+    Task<List<Assignment>> GetAllAssignments();
     Task CreateAssignment(Assignment asn);
     void DeleteAssignment(Assignment asn);
   }

@@ -6,6 +6,5 @@ namespace AsnRemainderAPI.DTO
     public string? CourseName { get; set; }
 
     public long AsnDueCount { get; set; }
-
   }
 }

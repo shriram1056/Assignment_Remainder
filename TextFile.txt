@@ -12,6 +12,13 @@ if foreign key column is non-nullable, then all the dependent entities will be d
 
 If nullable then set to null
 
+To update an entity with Entity Framework Core, this is the logical process:
+
+Create instance for DbContext class
+Retrieve entity by key
+Make changes on entity's properties
+Save changes
+
 commands: 
 dotnet add package package_name
 dotnet user-secrets init

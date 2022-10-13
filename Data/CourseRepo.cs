@@ -33,10 +33,10 @@ namespace AsnRemainderAPI.Data
 
     public async Task<Course?> GetCourseById(int id)
     {
-      return await _context.Courses.Include(course => course.Assignments).FirstOrDefaultAsync();
+      return await _context.Courses.Include(course => course.Assignments).FirstOrDefaultAsync(c => c.Id == id);
     }
 
-    public async Task<List<Course>> GetCourseCommands()
+    public async Task<List<Course>> GetAllCourses()
     {
       return await _context.Courses.Include(course => course.Assignments).ToListAsync();
     }

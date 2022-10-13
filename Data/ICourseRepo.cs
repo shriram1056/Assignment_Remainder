@@ -6,7 +6,7 @@ namespace AsnRemainderAPI.Data
   {
     Task SaveChanges();
     Task<Course?> GetCourseById(int id);
-    Task<List<Course>> GetCourseCommands();
+    Task<List<Course>> GetAllCourses();
     Task CreateCourse(Course asn);
     void DeleteCourse(Course asn);
   }
