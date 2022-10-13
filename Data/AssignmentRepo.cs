@@ -1,4 +1,5 @@
 using AsnRemainderAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AsnRemainderAPI.Data
 {
@@ -11,29 +12,38 @@ namespace AsnRemainderAPI.Data
       _context = context;
     }
     
-    public Task CreateAssignment(Assignment asn)
+    public async Task CreateAssignment(Assignment asn)
     {
-      throw new NotImplementedException();
+      if (asn == null)
+      {
+        throw new ArgumentNullException(nameof(asn));
+      }
+      await _context.Assignments.AddAsync(asn);
     }
 
     public void DeleteAssignment(Assignment asn)
     {
-      throw new NotImplementedException();
+      if (asn == null)
+      {
+        throw new ArgumentNullException(nameof(asn));
+      }
+
+      _context.Assignments.Remove(asn);
     }
 
-    public Task<Assignment?> GetAssignmentById(int id)
+    public async Task<Assignment?> GetAssignmentById(int id)
     {
-      throw new NotImplementedException();
+      return await _context.Assignments.FirstOrDefaultAsync(c => c.Id == id);
     }
 
-    public Task<List<Assignment>> GetAssignmentCommands()
+    public async Task<List<Assignment>> GetAssignmentCommands()
     {
-      throw new NotImplementedException();
+      return await _context.Assignments.ToListAsync();
     }
 
-    public Task SaveChanges()
+    public async Task SaveChanges()
     {
-      throw new NotImplementedException();
+      await _context.SaveChangesAsync();
     }
   }
 }

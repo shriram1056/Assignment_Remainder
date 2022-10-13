@@ -1,4 +1,5 @@
 using AsnRemainderAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AsnRemainderAPI.Data
 {
@@ -11,29 +12,38 @@ namespace AsnRemainderAPI.Data
     {
       _context = context;
     }
-    public Task CreateCourse(Course asn)
+    public async Task CreateCourse(Course course)
     {
-      throw new NotImplementedException();
+      if (course == null)
+      {
+        throw new ArgumentNullException(nameof(course));
+      }
+      await _context.Courses.AddAsync(course);
     }
 
-    public void DeleteCourse(Course asn)
+    public void DeleteCourse(Course course)
     {
-      throw new NotImplementedException();
+      if (course == null)
+      {
+        throw new ArgumentNullException(nameof(course));
+      }
+
+      _context.Courses.Remove(course);
     }
 
-    public Task<Course?> GetCourseById(int id)
+    public async Task<Course?> GetCourseById(int id)
     {
-      throw new NotImplementedException();
+      return await _context.Courses.Include(course => course.Assignments).FirstOrDefaultAsync();
     }
 
-    public Task<List<Course>> GetCourseCommands()
+    public async Task<List<Course>> GetCourseCommands()
     {
-      throw new NotImplementedException();
+      return await _context.Courses.Include(course => course.Assignments).ToListAsync();
     }
 
-    public Task SaveChanges()
+    public async Task SaveChanges()
     {
-      throw new NotImplementedException();
+      await _context.SaveChangesAsync();
     }
   }
 }

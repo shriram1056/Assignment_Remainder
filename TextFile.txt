@@ -8,6 +8,10 @@ value types (primitive) cannot be nullable whereas reference type can be nullabl
 
 int? is nullable and it is different type from int which cannot accpet null
 
+if foreign key column is non-nullable, then all the dependent entities will be deleted. 
+
+If nullable then set to null
+
 commands: 
 dotnet add package package_name
 dotnet user-secrets init
