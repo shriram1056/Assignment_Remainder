@@ -4,14 +4,10 @@ using AsnRemainderAPI.Models;
 
 namespace AsnRemainderAPI.Profiles
 {
-  public class AutomapperProfile : Profile
+  public class CourseProfile : Profile
   {
-    public AutomapperProfile()
+    public CourseProfile()
     {
-
-      CreateMap<Assignment, AssignmentReadDto>();
-      CreateMap<AssignmentCreateDto, Assignment>();
-      CreateMap<AssignmentUpdateDto, Assignment>();
       CreateMap<Course, CourseReadDto>();
       CreateMap<CourseCreateDto, Course>();
       CreateMap<CourseUpdateDto, Course>();

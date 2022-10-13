@@ -39,12 +39,28 @@ app.MapGet("api/v1/courses", async (ICourseRepo repo, IMapper mapper) =>
   return Results.Ok((mapper.Map<IEnumerable<CourseReadDto>>(courses)));
 });
 
+app.MapGet("api/v1/assignments", async (IAssignmentRepo repo, IMapper mapper) =>
+{
+  var assignments = await repo.GetAllAssignments();
+  return Results.Ok((mapper.Map<IEnumerable<AssignmentReadDto>>(assignments)));
+});
+
 app.MapGet("api/v1/courses/{id}", async (ICourseRepo repo, IMapper mapper, int id) =>
 {
   var course = await repo.GetCourseById(id);
-  if (course?.CourseName != null)
+  if (course != null)
   {
     return Results.Ok(mapper.Map<CourseReadDto>(course));
+  }
+  return Results.NotFound();
+});
+
+app.MapGet("api/v1/assignments/{id}", async (IAssignmentRepo repo, IMapper mapper, int id) =>
+{
+  var assignment = await repo.GetAssignmentById(id);
+  if (assignment != null)
+  {
+    return Results.Ok(mapper.Map<AssignmentReadDto>(assignment));
   }
   return Results.NotFound();
 });
@@ -62,15 +78,43 @@ app.MapPost("api/v1/courses", async (ICourseRepo repo, IMapper mapper, CourseCre
 
 });
 
+app.MapPost("api/v1/assignments", async (IAssignmentRepo repo, IMapper mapper, AssignmentCreateDto assignmentCreateDto) =>
+{
+  var assignmentModel = mapper.Map<Assignment>(assignmentCreateDto);
+  assignmentModel.DueDate = DateTime.Now;
+  await repo.CreateAssignment(assignmentModel);
+  await repo.SaveChanges();
+
+  var assignmentReadDto = mapper.Map<AssignmentReadDto>(assignmentModel);
+
+  return Results.Created($"api/v1/commands/{assignmentReadDto.Id}", assignmentReadDto);
+
+});
+
 app.MapPut("api/v1/courses/{id}", async (ICourseRepo repo, IMapper mapper, int id, CourseUpdateDto courseUpdateDto) =>
 {
-  var command = await repo.GetCourseById(id);
-  if (command == null)
+  var course = await repo.GetCourseById(id);
+  if (course == null)
   {
     return Results.NotFound();
   }
 
-  mapper.Map(courseUpdateDto, command);
+  mapper.Map(courseUpdateDto, course);
+
+  await repo.SaveChanges();
+
+  return Results.NoContent();
+});
+
+app.MapPut("api/v1/assignments/{id}", async (IAssignmentRepo repo, IMapper mapper, int id, AssignmentUpdateDto assignmentUpdateDto) =>
+{
+  var assignment = await repo.GetAssignmentById(id);
+  if (assignment == null)
+  {
+    return Results.NotFound();
+  }
+
+  mapper.Map(assignmentUpdateDto, assignment);
 
   await repo.SaveChanges();
 
@@ -79,17 +123,34 @@ app.MapPut("api/v1/courses/{id}", async (ICourseRepo repo, IMapper mapper, int i
 
 app.MapDelete("api/v1/courses/{id}", async (ICourseRepo repo, IMapper mapper, int id) =>
 {
-  var command = await repo.GetCourseById(id);
-  if (command == null)
+  var course = await repo.GetCourseById(id);
+  if (course == null)
   {
     return Results.NotFound();
   }
 
-  repo.DeleteCourse(command);
+  repo.DeleteCourse(course);
 
   await repo.SaveChanges();
 
   return Results.NoContent();
 
 });
+
+app.MapDelete("api/v1/assignments/{id}", async (IAssignmentRepo repo, IMapper mapper, int id) =>
+{
+  var assignment = await repo.GetAssignmentById(id);
+  if (assignment == null)
+  {
+    return Results.NotFound();
+  }
+
+  repo.DeleteAssignment(assignment);
+
+  await repo.SaveChanges();
+
+  return Results.NoContent();
+
+});
+
 app.Run();

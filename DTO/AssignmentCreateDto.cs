@@ -7,7 +7,7 @@ namespace AsnRemainderAPI.DTO
 
     public bool IsComplete { get; set; }
 
-    public DateTime DueDate { get; set; }
+    // public DateTime DueDate { get; set; }
 
     public int CourseId { get; set; }
 
